@@ -17,6 +17,12 @@ spring:
     show-sql: false
   flyway:
     default-schema: bicycle_register
+  rabbitmq:
+    username: admin
+    password: admin
+    host: localhost
+    port: 5672
+#    addresses: localhost:5672
 eureka:
   client:
     serviceUrl:

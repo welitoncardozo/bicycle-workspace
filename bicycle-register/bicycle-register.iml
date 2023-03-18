@@ -10,7 +10,9 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="entityManagerFactory" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
@@ -141,6 +143,12 @@
     <orderEntry type="library" name="Maven: org.flywaydb:flyway-core:9.5.1" level="project" />
     <orderEntry type="library" name="Maven: com.electronwill.night-config:toml:3.6.6" level="project" />
     <orderEntry type="library" name="Maven: com.electronwill.night-config:core:3.6.6" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-amqp:3.0.4" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-messaging:6.0.6" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.amqp:spring-rabbit:3.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.amqp:spring-amqp:3.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.retry:spring-retry:2.0.0" level="project" />
+    <orderEntry type="library" name="Maven: com.rabbitmq:amqp-client:5.16.0" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.26" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-starter-test:3.0.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test:3.0.4" level="project" />

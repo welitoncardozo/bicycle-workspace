@@ -1,27 +1,31 @@
 package com.welitoncardozo.bicycleallocation.services;
 
-import com.welitoncardozo.bicycleallocation.clients.BicycleRegisterRestClient;
+import com.welitoncardozo.bicycleallocation.clients.BicycleRegisterHandler;
 import com.welitoncardozo.bicycleallocation.dtos.BicycleAllocationInput;
 import com.welitoncardozo.bicycleallocation.enums.AllocationStatus;
 import com.welitoncardozo.bicycleallocation.models.BicycleAllocationEntity;
 import com.welitoncardozo.bicycleallocation.models.BicycleAllocationHistoricEntity;
 import com.welitoncardozo.bicycleallocation.repositories.BicycleAllocationHistoricRepository;
 import com.welitoncardozo.bicycleallocation.repositories.BicycleAllocationRepository;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static lombok.AccessLevel.PROTECTED;
-
-@AllArgsConstructor(access = PROTECTED)
 @Service
 public class BicycleAllocationService {
-    private final BicycleAllocationRepository bicycleAllocationRepository;
-    private final BicycleAllocationHistoricRepository bicycleAllocationHistoricRepository;
-    private final BicycleRegisterRestClient bicycleRegisterRestClient;
+    @Autowired
+    private BicycleAllocationRepository bicycleAllocationRepository;
+
+    @Autowired
+    private BicycleAllocationHistoricRepository bicycleAllocationHistoricRepository;
+
+    @Autowired
+    @Qualifier("bicycleRegisterMessageClient")
+    private BicycleRegisterHandler bicycleRegisterHandler;
 
     @Transactional
     public void save(final BicycleAllocationInput input) {
@@ -35,11 +39,11 @@ public class BicycleAllocationService {
 
     private void publishEvent(final BicycleAllocationEntity bicycleAllocation) {
         if (bicycleAllocation.getStatus().isRented()) {
-            bicycleRegisterRestClient.rent(bicycleAllocation.getBicycleId());
+            bicycleRegisterHandler.rent(bicycleAllocation.getBicycleId());
             return;
         }
 
-        bicycleRegisterRestClient.giveItBack(bicycleAllocation.getBicycleId());
+        bicycleRegisterHandler.giveItBack(bicycleAllocation.getBicycleId());
     }
 
     public List<BicycleAllocationEntity> findAll(final Long bicycle, final Long client) {
