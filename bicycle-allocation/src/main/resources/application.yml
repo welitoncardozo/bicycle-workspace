@@ -1,10 +1,22 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /bicycle-allocation-api
 spring:
   application:
     name: bicycle-allocation
-server:
-  port: 8082
-  servlet:
-    context-path: /bicycle-allocation-api
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bicycle_workspace
+    username: postgres
+    password: postgres
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: bicycle_allocation
+    show-sql: false
+  flyway:
+    default-schema: bicycle_allocation
 eureka:
   client:
     serviceUrl:

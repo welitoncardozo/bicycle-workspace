@@ -42,14 +42,14 @@ public class BicycleRegisterResource {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/aluga/{id}")
-    public ResponseEntity<?> aluga(@PathVariable Long id) {
+    @PutMapping("/rent/{id}")
+    public ResponseEntity<?> rent(@PathVariable Long id) {
         service.rent(id, true);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/devolve/{id}")
-    public ResponseEntity<?> devolve(@PathVariable Long id) {
+    @PutMapping("/give-it-back/{id}")
+    public ResponseEntity<?> giveItBack(@PathVariable Long id) {
         service.rent(id, false);
         return new ResponseEntity<>(HttpStatus.OK);
     }
