@@ -52,7 +52,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 .occurrenceDate(LocalDateTime.now())
                 .build();
 
-        return super.handleExceptionInternal(ex, messageExceptionHandler, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+        return super.handleExceptionInternal(ex, messageExceptionHandler, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
